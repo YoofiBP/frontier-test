@@ -63,6 +63,12 @@ Considering my experience with automated tools encompasses CypressJS and Seleniu
 a great opportunity for me to engage with Puppeteer for RPA. For a while I believed RPA to be some far away term but 
 this project made it clear to me that I had been doing it all along. Very grateful for the opportunity to turn this in.
 
+### Components to highlight
+* Validation takes place in globalMiddleware that can be found in src/config. This middleware ensures that only expected fields are passed on the controller and no fields are empty
+* HelmetJS was added to add HTTP security headers such as 'Content-Security-Policy'. This was not a requirement but simply based on personal practice for minimum security
+* Form Inputs were composed as classes as this made it easier to modify and maintain Puppeteers actions as it filled each input
+* Although there is no database, a models directory was created to store the desired structure of the request 
+* The constants file in src/config holds text constants used by Puppeteer during automation
 
 ### Time Spent: 7 hours
 
@@ -72,3 +78,6 @@ predictably was a large part of the challenge. I also spent roughly 30 minutes d
 issues. 45 minutes was spent attempting to implement the Asynchronous endpoints however given the time already
 spent I prioritised the initial task over the bonus task and went ahead to just describe the implementation as seen above.
 
+### Thoughts on improvement
+* On a lower level, I believe greater exposure to Puppeteer, its architecture and patterns would result in cleaner and more organised automation scripts
+* Given how long the request-response lifecycle is evidently, the asynchronous endpoint is a must for a large scale system as indicated in the design brief
