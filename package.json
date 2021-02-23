@@ -68,6 +68,7 @@
     "faker": "^5.1.0",
     "follow-redirects": "^1.13.0",
     "helmet": "^4.2.0",
+    "js-file-download": "^0.4.12",
     "lodash": "^4.17.21",
     "puppeteer": "^7.1.0",
     "ts-node": "^9.0.0",

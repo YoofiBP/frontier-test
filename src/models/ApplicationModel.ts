@@ -1,8 +1,8 @@
 
-interface iApplicationModel {
-    firstname:string
+export interface iApplicationModel {
+    fullname:string
     lastname:string
-    phone:string
+    phoneno:string
     email:string
     location:string
     linkedin:string
@@ -10,9 +10,9 @@ interface iApplicationModel {
 }
 
 export const ApplicationModel:Readonly<iApplicationModel> = {
-    firstname: "string",
+    fullname: "string",
     lastname: "string",
-    phone: "string",
+    phoneno: "string",
     email: "string",
     location: "string",
     linkedin: "string",

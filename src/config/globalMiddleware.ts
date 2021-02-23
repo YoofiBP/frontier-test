@@ -1,9 +1,8 @@
 import {Request, Response, NextFunction} from 'express'
 import pick from 'lodash/pick';
-import {ApplicationModel} from "../models/ApplicationModel";
 import {RequestValidationError} from "../services/errorHandling";
 
-export const requestSanitizer = (model:object) => (req:Request, res:Response, next:NextFunction) => {
+export const requestSanitizer = (model:object) => (req:Request, res:Response, next:NextFunction):void => {
     if(req.method === "POST") {
         //remove unexpected fields from JSON body
         req.body = pick(req.body, Object.keys(model));

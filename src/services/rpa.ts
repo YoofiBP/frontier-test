@@ -1,29 +1,41 @@
 import puppeteer from 'puppeteer'
-import qs from 'qs';
+import {FileInput, Input} from "./inputClass";
+import {
+    APPLY_NOW_CLASS,
+    FRONTIER_APPLICATION_URL,
+    NEXT_BUTTON_CLASS,
+    REVIEW_AND_SEND_BUTTON_CLASS, SEND_BUTTON_CLASS
+} from "../config/constants";
+import {iApplicationModel} from "../models/ApplicationModel";
 
-export const submitDataWithPuppet = async () => {
-    const browser = await puppeteer.launch();
+export const submitToFrontier = async (formData:iApplicationModel) => {
+    const browser = await puppeteer.launch({ headless: false, slowMo: 100 });
     const page = await browser.newPage();
-    console.log("Puppeteer running")
-    await page.setRequestInterception(true);
 
-    page.on("request", interceptedRequest => {
-        interceptedRequest.continue({
-            method: "POST",
-            postData: JSON.stringify({
-                firstname: "test",
-                lastname: "test",
-                phone: "1234567",
-                location: "Accra",
-                email: "email@example.com",
-                linkedin: "LinkedIn",
-                resume: "resume"
-            }),
-             headers: { "Content-Type": "application/json" }
-        });
-    });
-    await page.goto('http://localhost:5000/application/');
+    //Goto application link
+    await page.goto(FRONTIER_APPLICATION_URL);
 
+    //wait for Apply button to appear and click
+    await page.waitForSelector(APPLY_NOW_CLASS);
+    await page.click(APPLY_NOW_CLASS)
 
-    await browser.close();
-};
+    //make input for each input category
+    const {resume, ...props} = formData;
+
+    for (const prop of Object.keys(props)) {
+        const input = new Input(prop, page, props[prop]);
+        await input.makeInput()
+    }
+
+    //deal with resume input
+    // await clickByText(page, "Next");
+    await page.click(NEXT_BUTTON_CLASS)
+    const fileInput = new FileInput("resume",resume,page,'docx');
+    await fileInput.makeInput();
+
+    await page.waitForSelector(REVIEW_AND_SEND_BUTTON_CLASS)
+    await page.click(REVIEW_AND_SEND_BUTTON_CLASS)
+    await page.waitForSelector(SEND_BUTTON_CLASS)
+    await page.click(SEND_BUTTON_CLASS)
+
+}
