@@ -18,7 +18,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-// app.use(removeUnfillable)
+app.get('/', (req,res,next) => {
+    res.send("Hello")
+})
 app.use('/application', ApplicationRouter)
 app.use(appErrorHandler);
 app.all('*', (req, res) => {
