@@ -1,4 +1,5 @@
 # Frontier Automated Application Submission
+author: Yoofi Brown-Pobee
 
 ## Instructions
 
@@ -35,3 +36,39 @@ Run tests
     npm run test
 
 ### On differences between payload in product spec and payload in this documentation
+Using 'fulname' and 'phoneno' instead of the indicated 'firstname' and 'phone' makes iteration over the input fields
+easier. There is no need for additional code to remap the property names to the input names. The names of the input fields took
+precedence over the indicated property names.
+
+### On implementation of asynchronous endpoint
+An asynchronous API endpoint can be implemented using a message queuing system like RabbitMQ.
+
+The client sends a request to the asynchronous endpoint (Message Producer) which receives the request, pushes a new message/job unto the queue
+(for a background worker (Consumer) to fill the application form) and responds with a url which would have the result of the 
+background work sometime in the future. 
+
+When the background process completes, 
+the endpoint that was given to the user will be updated with the status of the background task.
+
+The client accesses the url given when the request was first made and are able to see the results of their original request. In this case
+a success/error message
+
+> An attempt to implement the queue can be seen in the src/services/async folder however give my 
+> level of familiarity with actual implementation it would take more time than I would like to spend on
+> this exercise before submission.
+
+## Thoughts on exercise
+This was a great assessment exercise! I started in the morning and was at it and did not notice the time fly.
+Considering my experience with automated tools encompasses CypressJS and Selenium web driver, this assessment was 
+a great opportunity for me to engage with Puppeteer for RPA. For a while I believed RPA to be some far away term but 
+this project made it clear to me that I had been doing it all along. Very grateful for the opportunity to turn this in.
+
+
+### Time Spent: 7 hours
+
+Bulk of the above time was spending debugging Puppeteer behaviour as I was getting it to behave 
+consistently. Puppeteer has a long of asynchronous behaviour and using it to automate the form inputs
+predictably was a large part of the challenge. I also spent roughly 30 minutes debugging Typescript and Babel Transpiling
+issues. 45 minutes was spent attempting to implement the Asynchronous endpoints however given the time already
+spent I prioritised the initial task over the bonus task and went ahead to just describe the implementation as seen above.
+

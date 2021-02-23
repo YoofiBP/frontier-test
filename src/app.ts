@@ -15,9 +15,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/forms/frontier/applications', ApplicationRouter)
-app.use(appErrorHandler);
+
 app.all('*', (req, res) => {
     res.status(404).send({message: "Nothing to see here"})
 })
 
+app.use(appErrorHandler);
 export default app;

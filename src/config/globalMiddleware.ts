@@ -8,7 +8,7 @@ export const requestSanitizer = (model:object) => (req:Request, res:Response, ne
         req.body = pick(req.body, Object.keys(model));
         //check if all fields are present
         Object.keys(model).forEach((prop: string) => {
-            if (!Object.keys(req.body).includes(prop)) {
+            if (!Object.keys(req.body).includes(prop) || req.body[prop].length === 0) {
                 next(new RequestValidationError(`Field '${prop}' is missing from request body`));
                 return
             }
