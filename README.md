@@ -79,7 +79,7 @@ this project made it clear to me that I had been doing it all along. Very gratef
 
 ### Time Spent: 7 hours
 
-Bulk of the above time was spending debugging Puppeteer behaviour as I was getting it to behave 
+Bulk of the above time was spending debugging Puppeteer behaviour to get it to behave 
 consistently. Puppeteer has a long of asynchronous behaviour and using it to automate the form inputs
 predictably was a large part of the challenge. I also spent roughly 30 minutes debugging Typescript and Babel Transpiling
 issues. 45 minutes was spent attempting to implement the Asynchronous endpoints however given the time already
