@@ -96,6 +96,7 @@ describe("User Action Tests", () => {
             expect(user.password).toBeTruthy()
         })
 
+
         it("User password should not be included in return response", async () => {
             const response = await signUpUser();
             expect(response.body).not.toMatchObject({password: expect.any(String)})
