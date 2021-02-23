@@ -34,3 +34,4 @@ Run tests
     npm test //or
     npm run test
 
+### On differences between payload in product spec and payload in this documentation

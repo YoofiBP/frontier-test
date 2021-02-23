@@ -22,6 +22,7 @@ export const submitToFrontier = async (formData:iApplicationModel) => {
     //make input for each input category
     const {resume, ...props} = formData;
 
+    //handle input of all fields except resume
     for (const prop of Object.keys(props)) {
         const input = new Input(prop, page, props[prop]);
         await input.makeInput()
@@ -33,6 +34,7 @@ export const submitToFrontier = async (formData:iApplicationModel) => {
     const fileInput = new FileInput("resume",resume,page,'docx');
     await fileInput.makeInput();
 
+    //Review and Send Form
     await page.waitForSelector(REVIEW_AND_SEND_BUTTON_CLASS)
     await page.click(REVIEW_AND_SEND_BUTTON_CLASS)
     await page.waitForSelector(SEND_BUTTON_CLASS)
