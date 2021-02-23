@@ -79,5 +79,7 @@ issues. 45 minutes was spent attempting to implement the Asynchronous endpoints 
 spent I prioritised the initial task over the bonus task and went ahead to just describe the implementation as seen above.
 
 ### Thoughts on improvement
+* Inclusion of unique data attributes or IDs on the relevant html elements would help make puppeteer more precise and give more confidence over the automation. Currently the solution was implemented using the available 
+  class selectors on the elements. 
 * On a lower level, I believe greater exposure to Puppeteer, its architecture and patterns would result in cleaner and more organised automation scripts
 * Given how long the request-response lifecycle is evidently, the asynchronous endpoint is a must for a large scale system as indicated in the design brief
