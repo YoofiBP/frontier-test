@@ -37,5 +37,6 @@ export const submitToFrontier = async (formData:iApplicationModel) => {
     await page.click(REVIEW_AND_SEND_BUTTON_CLASS)
     await page.waitForSelector(SEND_BUTTON_CLASS)
     await page.click(SEND_BUTTON_CLASS)
-
 }
+
+export default submitToFrontier;

@@ -6,7 +6,6 @@ export const requestSanitizer = (model:object) => (req:Request, res:Response, ne
     if(req.method === "POST") {
         //remove unexpected fields from JSON body
         req.body = pick(req.body, Object.keys(model));
-
         //check if all fields are present
         Object.keys(model).forEach((prop: string) => {
             if (!Object.keys(req.body).includes(prop)) {

@@ -1,12 +1,11 @@
 import dotenv from 'dotenv';
+dotenv.config();
 import express from "express";
 import bodyParser from "body-parser";
 import cors from 'cors';
 import helmet from "helmet";
 import ApplicationRouter from "./routes/ApplicationRouter";
 import {appErrorHandler} from "./services/errorHandling"
-
-dotenv.config();
 
 const app = express();
 
