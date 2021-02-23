@@ -1,10 +1,12 @@
 import puppeteer from 'puppeteer'
+import qs from 'qs';
 
-export const puppetTest = async () => {
+export const submitDataWithPuppet = async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     console.log("Puppeteer running")
     await page.setRequestInterception(true);
+
     page.on("request", interceptedRequest => {
         interceptedRequest.continue({
             method: "POST",
@@ -13,13 +15,15 @@ export const puppetTest = async () => {
                 lastname: "test",
                 phone: "1234567",
                 location: "Accra",
-                linkedin: "LinkedIN",
+                email: "email@example.com",
+                linkedin: "LinkedIn",
                 resume: "resume"
             }),
-            headers: { "Content-Type": "application/json" },
+             headers: { "Content-Type": "application/json" }
         });
     });
-    await page.goto('http://localhost:5000/application');
+    await page.goto('http://localhost:5000/application/');
+
 
     await browser.close();
 };

@@ -1,21 +1,22 @@
-import {Request,Response,NextFunction} from 'express'
-
+import {Request, Response, NextFunction} from 'express'
 import pick from 'lodash/pick';
 import {ApplicationModel} from "../models/ApplicationModel";
 import {RequestValidationError} from "../services/errorHandling";
 
-export const requestSanitizer = (req:Request, res:Response, next:NextFunction) => {
+export const requestSanitizer = (model:object) => (req:Request, res:Response, next:NextFunction) => {
+    if(req.method === "POST") {
+        //remove unexpected fields from JSON body
+        req.body = pick(req.body, Object.keys(model));
 
-    //remove unexpected fields from JSON body
-    req.body = pick(req.body, Object.keys(ApplicationModel));
-
-    //check if all fields are present
-    Object.keys(ApplicationModel).forEach(prop => {
-        if(!Object.keys(req.body).includes(prop)){
-            next(new RequestValidationError(`Field '${prop}' is missing from request body`));
-            return
-        }
-    })
+        //check if all fields are present
+        Object.keys(model).forEach((prop: string) => {
+            if (!Object.keys(req.body).includes(prop)) {
+                next(new RequestValidationError(`Field '${prop}' is missing from request body`));
+                return
+            }
+        })
+    }
     next();
+    return
 }
 
