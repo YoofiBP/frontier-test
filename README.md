@@ -3,6 +3,13 @@ author: Yoofi Brown-Pobee
 
 ## Instructions
 
+Clone Repository in directory of choice and navigate into project directory
+  
+    git clone https://github.com/YoofiBP/frontier-test.git
+    cd frontier-test
+
+> Install and testing commands should be run from the root of the project directory
+
 Install dependencies
 
     npm install
@@ -29,10 +36,10 @@ Payload Structure
     }
 
 ### Testing
+Tests can be found in the tests directory
 
 Run tests
 
-    npm test //or
     npm run test
 
 ### On differences between payload in product spec and payload in this documentation
