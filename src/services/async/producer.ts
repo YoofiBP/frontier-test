@@ -1,31 +1,26 @@
-import dotenv from "dotenv";
-import amqp from 'amqplib';
+import amqp, { Channel, Connection } from "amqplib/callback_api";
 
-dotenv.config();
-
-export const config = {
-    port: process.env.APP_PORT,
-    rabbit: {
-        connectionString: `amqp://${process.env.USER_}:${process.env.PASS}@${process.env.HOST}/${process.env.VHOST}`,
-        queue: process.env.QUEUE_NAME
-    }
-}
-
-const publishToQueue = async (queue, message, durable = false) => {
-    try {
-        const cluster = await amqp.connect(config.rabbit.connectionString);
-        const channel = await cluster.createChannel();
-        await channel.assertQueue(queue, durable = false);
-        await channel.sendToQueue(queue, Buffer.from(message));
-
-        console.info(' [x] Sending message to queue', queue, message);
-
-    } catch (error) {
-        // handle error response
-        console.error(error, 'Unable to connect to cluster!');
-        process.exit(1);
+amqp.connect(
+  "amqp://localhost",
+   (conError: unknown, connection: Connection) => {
+    if (conError) {
+      throw conError;
     }
 
-}
+    //Create Channel
+    connection.createChannel(
+      (channelError, channel: Channel) => {
+        if (channelError) {
+          throw channelError;
+        }
 
-export default publishToQueue;
+        //Assert Queue
+        channel.assertQueue("testqueue");
+
+        //Send message to Queue
+        channel.sendToQueue("testqueue", Buffer.from("hello world"));
+        console.log("Message sent");
+      }
+    );
+  }
+);
