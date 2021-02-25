@@ -2,6 +2,8 @@ import amqp, { Channel, Connection } from "amqplib";
 import { changeTokenStatus, findToken } from "../databaseServices";
 import { submitToFrontier } from "../rpa";
 import "../../config/db";
+import { sendNotification } from "../emailServices";
+import { sendGridNotifier } from "../../config/mail";
 
 const connect = async () => {
   const connection = await amqp.connect("amqp://localhost");
@@ -17,10 +19,11 @@ const connect = async () => {
       message.content.toString()
     );
     console.log("Processing Message");
-    await submitToFrontier(requestPayload);
 
     try {
+      await submitToFrontier(requestPayload);
       await changeTokenStatus("complete", tokenPayload);
+      sendNotification(sendGridNotifier)(requestPayload);
       console.log("Processing Complete, URL updated");
     } catch (error) {
       console.log(error);

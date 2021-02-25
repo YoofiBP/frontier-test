@@ -6,7 +6,7 @@ import channel from "../services/queueing/producer";
 import { createToken, findToken } from "../services/databaseServices";
 
 class ApplicationController {
-  store = async (req: Request, res: Response, next: NextFunction) => {
+  asyncStore = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const token = await createToken();
       const requestPayload = req.body;
@@ -25,6 +25,17 @@ class ApplicationController {
       });
     } catch (e) {
       next(e);
+    }
+  };
+
+  store = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await submitToFrontier(req.body as iApplicationModel);
+      return res.status(200).json({
+        message: "Success",
+      });
+    } catch (error) {
+      next(error);
     }
   };
 

@@ -6,6 +6,11 @@ import { ApplicationModel } from "../models/ApplicationModel";
 const ApplicationRouter: Router = Router();
 
 ApplicationRouter.post(
+  "/async",
+  requestSanitizer(ApplicationModel),
+  applicationController.asyncStore
+);
+ApplicationRouter.post(
   "/",
   requestSanitizer(ApplicationModel),
   applicationController.store
