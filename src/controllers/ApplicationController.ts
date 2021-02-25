@@ -8,18 +8,19 @@ import { createToken, findToken } from "../services/databaseServices";
 class ApplicationController {
   asyncStore = async (req: Request, res: Response, next: NextFunction) => {
     try {
+      //generate token
       const token = await createToken();
       const requestPayload = req.body;
       const tokenPayload = token.payload;
+
+      //place message on queue
       (await channel).sendToQueue(
         "FRONTIER",
         Buffer.from(JSON.stringify({ requestPayload, tokenPayload }))
       );
-      //generate token
 
+      //generate and send link to allow user to return to view status
       const referral = `localhost:5000/forms/frontier/applications/confirm/${tokenPayload}`;
-      //   (await channel).sendToQueue("FRONTIER", Buffer.from(req.body));
-      //await submitToFrontier(req.body as iApplicationModel);
       return res.status(200).json({
         referral,
       });
@@ -30,6 +31,7 @@ class ApplicationController {
 
   store = async (req: Request, res: Response, next: NextFunction) => {
     try {
+      //submit application form to frontier
       await submitToFrontier(req.body as iApplicationModel);
       return res.status(200).json({
         message: "Success",

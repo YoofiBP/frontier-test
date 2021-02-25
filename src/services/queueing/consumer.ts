@@ -21,14 +21,21 @@ const connect = async () => {
     console.log("Processing Message");
 
     try {
+      //submit application form to frontier
       await submitToFrontier(requestPayload);
+
+      //update token given to user
       await changeTokenStatus("complete", tokenPayload);
+
+      //send notification to user email on completion of the job
       sendNotification(sendGridNotifier)(requestPayload);
+
       console.log("Processing Complete, URL updated");
     } catch (error) {
       console.log(error);
     }
 
+    //Acknowledge message
     channel.ack(message);
   });
 };
