@@ -23,7 +23,7 @@ export const consume = async (channel:Channel) => {
       await changeTokenStatus("complete", tokenPayload);
 
       //send notification to user email on completion of the job
-      //sendNotification(sendGridNotifier)(requestPayload);
+      sendNotification(sendGridNotifier)(requestPayload);
 
       console.log("Processing Complete, URL updated and e-mail sent");
     } catch (error) {
