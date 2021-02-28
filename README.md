@@ -61,12 +61,6 @@ Run tests
 
     npm run test
 
-### On differences between payload in product spec and payload in this documentation
-
-Using 'fullname' and 'phoneno' instead of the indicated 'firstname' and 'phone' makes iteration over the input fields
-easier. There is no need for additional code to remap the property names to the input names. The names of the input fields took
-precedence over the indicated property names.
-
 ---
 
 ### On implementation of asynchronous endpoint
@@ -115,6 +109,11 @@ Failure Response
     Status code: 500
 
 ---
+### On differences between payload in product spec and payload in this documentation
+
+Using 'fullname' and 'phoneno' instead of the indicated 'firstname' and 'phone' makes iteration over the input fields
+easier. There is no need for additional code to remap the property names to the input names. The names of the input fields took
+precedence over the indicated property names.
 
 ## Thoughts on exercise
 
