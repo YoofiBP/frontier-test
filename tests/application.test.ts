@@ -4,8 +4,12 @@ import {Request, Response, NextFunction} from 'express';
 import {requestSanitizer} from "../src/config/globalMiddleware";
 import {ApplicationModel} from "../src/models/ApplicationModel";
 import submitToFrontier from "../src/services/rpa";
+import '../src/services/queueing/producer'
+import '../src/services/queueing/consumer'
 
 jest.mock("../src/services/rpa");
+jest.mock("../src/services/queueing/producer");
+jest.mock("../src/services/queueing/consumer");
 
 describe('Application Submission Tests', () => {
     const applicationSubmissionRoute = `/forms/frontier/applications`;
