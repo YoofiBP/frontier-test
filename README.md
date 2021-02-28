@@ -4,7 +4,7 @@ author: Yoofi Brown-Pobee
 
 ## Instructions
 
-Clone Repository in directory of choice and navigate into project directory
+Clone Repository in a directory of choice and navigate into project directory
 
     git clone https://github.com/YoofiBP/frontier-test.git
     cd frontier-test
