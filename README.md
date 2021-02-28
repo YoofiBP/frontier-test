@@ -15,6 +15,8 @@ Install dependencies
 
     npm install
 
+Note: Kindly note that environment variables have been committed for a smooth setup experience albeit not best practice
+
 Run Server
 
     npm run dev
