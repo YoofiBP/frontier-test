@@ -1,24 +1,34 @@
+import dotenv from "dotenv";
+dotenv.config({path: './test.env'});
 import supertest from "supertest";
 import app from '../src/app';
 import {Request, Response, NextFunction} from 'express';
 import {requestSanitizer} from "../src/config/globalMiddleware";
 import {ApplicationModel} from "../src/models/ApplicationModel";
-import submitToFrontier from "../src/services/rpa";
-import '../src/services/queueing/producer'
+import "../src/services/rpa";
 import '../src/services/queueing/consumer'
+import {createToken} from "../src/services/databaseServices";
+
 
 jest.mock("../src/services/rpa");
-jest.mock("../src/services/queueing/producer");
+jest.mock("../src/services/queueing/producer",() => {
+    return {
+        default: jest.fn(),
+        createChannel: jest.fn()
+    }
+});
 jest.mock("../src/services/queueing/consumer");
 
 describe('Application Submission Tests', () => {
     const applicationSubmissionRoute = `/forms/frontier/applications`;
+    const confirmationRoute = (confirmationToken) => `/forms/frontier/applications/confirm/${confirmationToken}`
 
     beforeEach(() => {
-        jest.clearAllMocks()
+        jest.clearAllMocks();
     })
 
     it('Should return Status 200 when there is no error', async () => {
+
         const response = await supertest(app)
             .post(applicationSubmissionRoute)
             .send({
@@ -75,5 +85,18 @@ describe('Application Submission Tests', () => {
         requestSanitizer(ApplicationModel)(mockRequest as Request, mockResponse as Response,nextFunction);
         expect(Object.keys(ApplicationModel)).toEqual(expect.arrayContaining(Object.keys(mockRequest.body)))
         expect(nextFunction).toHaveBeenCalled();
+    })
+
+    it('Should return token as json when confirmation route is accessed', async () => {
+        const token = await createToken();
+
+        const response = await supertest(app).get(confirmationRoute(token.payload));
+
+        expect(response.status).toEqual(200);
+
+        expect(response.body).toMatchObject({
+            status: token.status,
+            payload: token.payload
+        });
     })
 })

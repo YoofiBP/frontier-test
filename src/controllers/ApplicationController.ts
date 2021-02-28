@@ -23,8 +23,8 @@ class ApplicationController {
       return res.status(200).json({
         referral,
       });
-    } catch (e) {
-      next(e);
+    } catch (error) {
+      next(error);
     }
   };
 
