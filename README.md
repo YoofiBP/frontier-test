@@ -36,6 +36,23 @@ Payload Structure
         "resume": "https://frontier-public-assets.s3-us-west-2.amazonaws.com/05oo7evmr4hsc7ufvmdcpojlh1ki1rd3benjo0g1_Brian_CV.docx"  # link to publicliy available Resume
     }
 
+Success Response
+
+    {
+      "message": "Success"
+    }
+
+    Status code: 200
+
+Failure Response
+
+    {
+      status: "err",
+      message: "errorMessage"
+    }
+
+    Status code: 500
+
 ### Testing
 
 Tests can be found in the tests directory
@@ -79,6 +96,24 @@ The asynchronous endpoint has been implemented and can be accessed on the branch
 Execute POST request to endpoint
 
     http://localhost:5000/forms/frontier/applications/async
+
+Success Response
+
+    {
+      "referral": "link-to-payload-showing-status-of-async-job"
+    }
+
+    Status code: 200
+
+Failure Response
+
+    {
+      status: "err",
+      message: "errorMessage"
+    }
+
+    Status code: 500
+
 ---
 
 ## Thoughts on exercise

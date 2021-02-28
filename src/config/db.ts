@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
 
+const databaseConnectionString = process.env.MONGO_PRODUCTION_URL || "mongodb://localhost/frontier"
+
 mongoose
-  .connect("mongodb://localhost/frontier", {
+  .connect(databaseConnectionString, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: true,
