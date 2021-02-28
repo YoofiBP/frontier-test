@@ -50,5 +50,6 @@ export class FileInput extends Input {
         console.log("Download Complete")
         const elementHandle = await this.page.$("input[type=file]");
         await elementHandle.uploadFile(`./${this.name}.${this.extension}`);
+        await this.page.waitForTimeout(1000);
     }
 }

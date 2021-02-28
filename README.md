@@ -19,9 +19,13 @@ Note: Kindly note that environment variables have been committed for a smooth se
 
 Run Server
 
-    npm run dev
+    npm start
 
-The App is configured to run on PORT 5000
+The App is configured to run on PORT 5000. Kindly wait for the following messages to appear on the console before executing request
+* Server running on port: PORT_NUMBER
+* Database connected successfully
+* Queueing Channel created (for async endpoints)
+
 
 Execute POST request to endpoint
 
