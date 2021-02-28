@@ -1,9 +1,10 @@
-import amqp, { Channel, Connection } from "amqplib";
+import amqp from "amqplib";
+import {rabbitMQConfig} from "../../config/queue";
 
 const createChannel = async () => {
-  const connection = await amqp.connect("amqp://localhost");
+  const connection = await amqp.connect(rabbitMQConfig.connectionString);
   const channel = await connection.createChannel();
-  await channel.assertQueue("FRONTIER");
+  await channel.assertQueue(rabbitMQConfig.queueName);
 
   console.log("Queueing Channel created");
 

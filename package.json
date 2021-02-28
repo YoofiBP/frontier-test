@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/server.ts",
+    "start": "concurrently \"ts-node src/server.ts\" \"ts-node src/services/queueing/consumer.ts\"",
     "build": "tsc",
-    "dev": "nodemon src/server.ts",
+    "dev": "concurrently \"nodemon src/server.ts\" \"nodemon src/services/queueing/consumer.ts\"",
     "test": "jest --watch --runInBand"
   },
   "engines": {
@@ -63,6 +63,7 @@
     "amqplib": "^0.7.0",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
+    "concurrently": "^6.0.0",
     "cors": "^2.8.5",
     "crypto-random-string": "^3.3.1",
     "dotenv": "^8.2.0",
