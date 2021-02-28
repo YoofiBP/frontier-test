@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"ts-node src/server.ts\" \"ts-node src/services/queueing/consumer.ts\"",
+    "start": "ts-node src/server.ts",
     "build": "tsc",
-    "dev": "concurrently \"nodemon src/server.ts\" \"nodemon src/services/queueing/consumer.ts\"",
+    "dev": "nodemon src/server.ts",
     "test": "jest --watch --runInBand"
   },
   "engines": {

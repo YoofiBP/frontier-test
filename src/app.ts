@@ -6,11 +6,12 @@ import cors from "cors";
 import helmet from "helmet";
 import ApplicationRouter from "./routes/ApplicationRouter";
 import { appErrorHandler } from "./services/errorHandling";
-import "./services/queueing/producer";
-import channel from "./services/queueing/producer";
 import "./config/db";
+import channel from "./services/queueing/producer";
+import {consume} from "./services/queueing/consumer";
 
 const app = express();
+
 
 app.use(helmet());
 app.use(cors());
@@ -24,4 +25,10 @@ app.all("*", (req, res) => {
 });
 
 app.use(appErrorHandler);
+
+//start consumer
+(async () => {
+  await consume(await channel);
+})()
+
 export default app;

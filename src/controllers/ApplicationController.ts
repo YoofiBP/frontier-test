@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { submitToFrontier } from "../services/rpa";
 import { iApplicationModel } from "../models/ApplicationModel";
-import "../services/queueing/producer";
 import channel from "../services/queueing/producer";
 import { createToken, findToken } from "../services/databaseServices";
 

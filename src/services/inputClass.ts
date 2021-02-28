@@ -47,7 +47,7 @@ export class FileInput extends Input {
 
     async makeInput(){
         await this.downloadResume();
-        console.log("downloadComplete")
+        console.log("Download Complete")
         const elementHandle = await this.page.$("input[type=file]");
         await elementHandle.uploadFile(`./${this.name}.${this.extension}`);
     }
