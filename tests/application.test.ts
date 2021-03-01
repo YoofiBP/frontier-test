@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config({path: './test.env'});
+dotenv.config();
 import supertest from "supertest";
 import app from '../src/app';
 import {Request, Response, NextFunction} from 'express';
