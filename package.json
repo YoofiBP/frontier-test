@@ -7,7 +7,7 @@
     "start": "ts-node src/server.ts",
     "build": "tsc",
     "dev": "nodemon src/server.ts",
-    "test": "jest --watch --runInBand"
+    "test": "jest --runInBand"
   },
   "engines": {
     "node": "14.15.3"
